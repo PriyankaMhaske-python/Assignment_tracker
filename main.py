@@ -4,9 +4,6 @@ import mysql.connector
 import random
 import os
 from datetime import datetime
-
-
-
 UPLOAD_FOLDER="D:/Assignment Tracker/uploaded_files"
 
 app = Flask(__name__)
@@ -333,7 +330,6 @@ def get_typeofuser(userid):
         
 
     return result
-    
 @app.route('/forgot_password',methods=['GET','POST'])
 def forgot_password():
     msg=''
