@@ -1,0 +1,25 @@
+<html>
+<head>
+</head>
+<body>
+
+<h2>Students list whose assignments are rejected </h2>
+<table border="1">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Mobile no</th>
+		
+	</tr>
+	{% for item in records %}
+	<tr>
+		<td>{{item[0]}}</td>
+		<td>{{item[1]}}</td>
+		<td>{{item[2]}}</td>
+		
+	</tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

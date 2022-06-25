@@ -1,0 +1,65 @@
+<html>
+<head></head>
+<h2>Welcome to teacher profile!!!</h2>
+<body>
+{% if name %}
+    Welcome to your profile {{ name }}!!!!!!
+	<br>
+	<a href="/publish_assignment">Publish assignment</a>
+	<br>
+	<a href="/view_solution">View Solution of Assignment</a>
+	<br>
+    <a href="/logout">Logout</a>
+	<br>
+	<a href="/delete">Delete</a>
+	<br>
+	<a href="/update">Update Details Of your Profile</a>
+	<br>
+	<a href="/gettrack_ofassignments">Track Assignments</a>
+	<br>
+   
+{% else %}
+    Dont have an account <a href="/register">create your account</a>
+{% endif %}
+
+{% if name %}
+     Your profile detalis here...
+<table border="1">
+    <tr>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Mobile No</th>
+        <th>Email</th>
+        
+    </tr>
+
+    {% for item in records %}
+    <tr>
+        <td>{{item[0]}}</td>
+        <td>{{item[1]}}</td>
+        <td>{{item[3]}}</td>
+        <td>{{item[4]}}</td>
+        
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+	Dont have an account 
+	
+{% endif %}
+{{ myhtml|e }}
+
+
+{{ myhtml|e }}
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

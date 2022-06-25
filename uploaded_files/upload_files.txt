@@ -1,0 +1,39 @@
+@app.route('/uploader',methods=["GET","POST"])        
+def upload_file():
+    submissionid=str(random.randint(0,10000))
+    
+    msg=''
+    try:
+        with mysql.connector.connect(host="localhost",user="root",password="root@123",database="assignment_tracking") as connection:
+            with connection.cursor() as cursor:
+                cursor = connection.cursor()
+                if request.method == 'POST':
+                    submission_date = datetime.now()
+                    f = request.files['file']
+                    f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+                    
+                    u1 = f"""select userid from user where name='{session['name']}' ;"""
+                    cursor.execute(u1)
+                    userid_record=cursor.fetchall()
+                    userid=userid_record[0]
+                    
+                    title=request.form['title']
+                    
+                    a1 = f"""select assignmentid from assignment where title='{title}';"""
+                    cursor.execute(a1)
+                    assignmentid_rec=cursor.fetchone()
+                    print(userid_record)
+                    print(assignmentid_rec)
+                    
+                    query=f"""insert into submission(submissionid,assignmentid,userid,submission_date,solution)values('{submissionid}','{assignmentid_rec[0]}','{userid[0]}','{submission_date}','{UPLOAD_FOLDER}');"""
+                    print(query)
+                    cursor.execute(query)
+                    connection.commit()
+                    msg = 'You have successfully uploaded new assignment !'
+                    return msg
+            
+    except Exception as e:
+        print(e)    
+
+    return render_template('student_profile.html') 
+ 
